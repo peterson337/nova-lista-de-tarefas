@@ -1,31 +1,35 @@
 import React, { useState } from 'react';
-const Edit_task = ({ task, onSave, onCancel }) => {
-const { title = '', description = '', dueDate = '', id } = task || {};
+const Edit_task = ({ task, onSave, onCancel, props, taskText  }) => {
+
+const { title = ''} = task || {};
 
 const [newTitle, setNewTitle] = useState(title);
-const [newDescription, setNewDescription] = useState(description);
-const [newDueDate, setNewDueDate] = useState(dueDate);
+const [editTask, setEditTask] = useState({ task: "" });
+
 
 return (
   <form onSubmit={(e) => {
       e.preventDefault();
-      onSave(newTitle, newDescription, newDueDate);
+      onSave(newTitle);
     }}
   >
     <label htmlFor="newTitle"></label>
-    <input
-      type="text"
-      id="newTitle"
-      value={newTitle}
-      onChange={(e) => setNewTitle(e.target.value)}
-      style={{backgroundColor: 'white', color: 'black'}}
-      className='inputAdicionarTarefa'
-      placeholder="Editar a sua tarefa!"
-    />
-
+<input
+  type="text"
+  name="newTitle"
+  id="newTitle"
+  defaultValue={taskText} required
+  onChange={(e) => setNewTitle(e.target.value)}
+  style={{backgroundColor: 'white', color: 'black'}}
+  className='inputAdicionarTarefa'
+  placeholder="Editar a sua tarefa!"
+/>
+     
     <button type="submit" className=" btnAdicionarTarefa">Salvar tarefa editada!</button>
   </form>
+  
 );
+
 };
 
 export default Edit_task;

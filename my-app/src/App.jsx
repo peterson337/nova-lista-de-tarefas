@@ -6,8 +6,23 @@ import {BsPencil} from "react-icons/bs";
 //TODO: Cheack FaTrash BiPlusMedical
 import {AiOutlineCheck} from "react-icons/ai";
 import {FaTrash} from "react-icons/fa";
-import {BiPlusMedical} from "react-icons/bi";
 import Edit_task from "./edit_task";
+import { collection, addDoc } from "firebase/firestore"; // importando a biblioteca
+import {db} from "./firabse";
+
+
+// criando uma referência para a coleção de tarefas
+const tasksCollectionRef = collection(db, "tasks");
+
+// escrevendo os dados da tarefa no Firestore
+async function addTaskToFirestore(task) {
+  try {
+    const docRef = await addDoc(tasksCollectionRef, task);
+    /* console.log("Task written with ID: ", docRef.id); */
+  } catch (e) {
+    console.error("Error adding task: ", e);
+  }
+}
 
 
 const App = () => {
@@ -17,6 +32,9 @@ const App = () => {
   const [editTaskText, setEditTaskText] = useState("");
   const [modal, setModal] = useState(false);
   const [modalEditarTarefa, setModalEditarTarefa] = useState(false);
+  const [editTask, setEditTask] = useState(null); // adicionar o estado editTask
+
+  
   
   useEffect(() => {
     const storedList = JSON.parse(localStorage.getItem('itemsList'));
@@ -32,7 +50,7 @@ const App = () => {
     setTask(inputTask);
   }
 
-  const handleAddItemToList = (event) => {
+  const handleAddItemToList = (event, id) => {
     event.preventDefault(); 
 
     if (!task.trim()) { // <----- Se nao tiver vazio, nao faz nada
@@ -45,12 +63,17 @@ const App = () => {
       id: Date.now(),
       completed: false
     }
+    addTaskToFirestore(word); // <- Chamando a função aqui
     const newList = [...itemsList, word];
     setItemsList(newList);
     localStorage.setItem("itemsList", JSON.stringify(newList));
     setTask("");
+    const selectedTask = itemsList.find((item) => item.id === id); // encontra a tarefa selecionada
+    setEditTask(selectedTask); // armazena a tarefa selecionada no estado editTask
+
     setModal(false);
   }
+
   const  handleDeleteItem = (id) => {
     const updatedItemsList = itemsList.filter((item) => item.id !== id);
     setItemsList(updatedItemsList);
@@ -74,12 +97,12 @@ const handleToggleCompleted = (itemId) => {
 };
 
 
-  const handleEditClick = (id, task) => {
+  const handleEditClick = (id) => {
+    const selectedTask = itemsList.find((item) => item.id === id); // encontrar a tarefa selecionada
+    setEditTask(selectedTask);
     setEditTaskId(id);
     setModalEditarTarefa(true);
-    //setTaskToEdit({ id: id, task: task });
-  };
-  
+  };    
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
@@ -117,13 +140,17 @@ const fecharModalEditarTarefa  = () => {
       return updatedList;
     });
     setModalEditarTarefa(false);
+    setEditTask(null)
   };
   
 
 const handleSave = (newTitle, newDescription, newDueDate) => {
-  handleEditTask(editTaskId, newTitle, newDescription, newDueDate);
+  handleEditTask(editTaskId, newTitle, newDescription, newDueDate, editTask.id);
+ 
  
 };
+
+
   
   return (
 
@@ -190,12 +217,16 @@ const handleSave = (newTitle, newDescription, newDueDate) => {
   
   <div className='backgroundModal' onClick={fecharModalEditarTarefa} >
   <div className='modal'>
-<Edit_task
+  <Edit_task
   modalEditarTarefa={modalEditarTarefa}
   fecharModalEditarTarefa={fecharModalEditarTarefa}
   onSave={handleSave}
-  editTaskText={editTaskText}
+  setEditTask={setEditTask}
+  taskText={editTask ? editTask.task : ""} // adiciona essa linha
+
 />
+
+
    
   </div>
   </div>
