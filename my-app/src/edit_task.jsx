@@ -19,10 +19,10 @@ return (
   name="newTitle"
   id="newTitle"
   defaultValue={taskText} required
-  onChange={(e) => setNewTitle(e.target.value)}
-  style={{backgroundColor: 'white', color: 'black'}}
-  className='inputAdicionarTarefa'
-  placeholder="Editar a sua tarefa!"
+      onChange={(e) => setNewTitle(e.target.value)}
+      style={{backgroundColor: 'white', color: 'black'}}
+      className='inputAdicionarTarefa'
+      placeholder="Editar a sua tarefa!"
 />
      
     <button type="submit" className=" btnAdicionarTarefa">Salvar tarefa editada!</button>

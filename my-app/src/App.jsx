@@ -106,12 +106,14 @@ const handleToggleCompleted = (itemId) => {
 
   const handleSaveEdit = (e) => {
     e.preventDefault();
-    const newTitle = document.querySelector('#newTitle').value;
-    const newDescription = document.querySelector('#newDescription').value;
-    const newDueDate = document.querySelector('#newDueDate').value;
-    handleEditTask(editTaskId, newTitle, newDescription, newDueDate);
+    const newTitle = document.querySelector('#newTitle').value.trim();
+    const newDescription = document.querySelector('#newDescription').value.trim();
+    const newDueDate = document.querySelector('#newDueDate').value.trim();
+    const title = newTitle === '' ? editTask.task : newTitle;
+    handleEditTask(editTaskId, title, newDescription, newDueDate);
     fecharModalEditarTarefa();
   };
+  
   
   const abrirModal  = () => {
       setModal(true);
@@ -146,8 +148,9 @@ const fecharModalEditarTarefa  = () => {
 
 const handleSave = (newTitle, newDescription, newDueDate) => {
   handleEditTask(editTaskId, newTitle, newDescription, newDueDate, editTask.id);
- 
- 
+  const title = newTitle === '' ? editTask.task : newTitle;
+  handleEditTask(editTaskId, title, newDescription, newDueDate);
+  fecharModalEditarTarefa(); 
 };
 
 
@@ -198,7 +201,7 @@ const handleSave = (newTitle, newDescription, newDueDate) => {
     <form onSubmit={handleAddItemToList}>
 
   <input type="text" className='inputAdicionarTarefa' placeholder='Adicione uma tarefa' 
-  onChange={handleChangeInput} value={task}  style={{color: 'black', backgroundColor:'white'}} />
+  onChange={handleChangeInput} value={task}  style={{color: 'black', backgroundColor:'white'}} required/>
 
   <br />
 
@@ -222,7 +225,7 @@ const handleSave = (newTitle, newDescription, newDueDate) => {
   fecharModalEditarTarefa={fecharModalEditarTarefa}
   onSave={handleSave}
   setEditTask={setEditTask}
-  taskText={editTask ? editTask.task : ""} // adiciona essa linha
+  taskText={editTask ? editTask.task : ""} 
 
 />
 
