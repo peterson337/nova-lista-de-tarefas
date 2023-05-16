@@ -153,11 +153,17 @@ const handleSave = (newTitle, newDescription, newDueDate) => {
   fecharModalEditarTarefa(); 
 };
 
+const iconStyle = {
+  marginRight: '30px',
+  color: 'red',
+  cursor: 'pointer',
+  padding: '5px',
+  borderRadius: '20%'
+};
 
-  
   return (
 
-      <div className='div'>
+      <div>
       <div className='divContat'>
       <h1 className='titleH1'>Tarefas do dia!</h1>           
       <div>
@@ -174,7 +180,7 @@ const handleSave = (newTitle, newDescription, newDueDate) => {
     {item.task}</span>
     <div className='teste'>
 
-    <span style={{marginRight:'30px', color:'red', cursor:'pointer'}} onClick={() => handleDeleteItem(item.id)}> 
+    <span style={iconStyle} onClick={() => handleDeleteItem(item.id)}> 
     <FaTrash/>
     </span>
     

@@ -1,6 +1,6 @@
 .spanTask{
   max-width: 200px;
-  margin-bottom: 10px;
+  margin: 0px 0px;
 }
 
 .h1TarefaN{
@@ -20,43 +20,50 @@
     margin: 0 213px 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid black;
+    position: relative;
+    bottom: 204px;
+
   }
 
 .completed {
-    color: #bbbbbb;
-    text-decoration: line-through;
-    display: flex;
-    margin-left: 155px;
-    word-wrap: break-word;
-    border-bottom: 2px dotted black;
-    margin: 10px 229px;
-    cursor: pointer;
+  margin-left: 155px;
+  word-wrap: break-word;
+  border-bottom: 2px dotted black;
+  margin: 10px 229px;
+  cursor: pointer;
+  position: relative;
+  bottom: 204px;
+  color: gray;
+  text-decoration: line-through;
   }
   
   .incompleted{
-    display: flex;
     margin-left: 155px;
     word-wrap: break-word;
     border-bottom: 2px dotted black;
     margin: 10px 229px;
     cursor: pointer;
+    position: relative;
+    bottom: 204px;
   }
 
   .teste{
-    margin-left: 30px;
+    margin: 10px;
+    
   }
 
   .divContat{
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 56%;
     max-width: 800px;
-    background-color: #fff;
-    padding: 30px 0px;
-    margin: 10px auto;
-    border-radius: 20px;
-    color: #000;
+    background-color: #ffff00;
+    padding: 306px 0px;
+    margin: 30px auto;
+    /* border-radius: 20px; */
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
   }
 
 
@@ -140,34 +147,30 @@
     }
 
     .titleH1{
-      margin:  10px 20px;
+      margin: 10px -13px;
       width: 234px;
-       font-size: 30px;
+      font-size: 30px;
       padding-bottom: 10px;
       border-bottom: 1px solid black;
     }
 
     .completed {
-      color: #bbbbbb;
-      text-decoration: line-through;
-      display: flex;
-      margin-left: 25px;
-      margin: 10px 30px;
-  
+      word-wrap: break-word;
+      border-bottom: 2px dotted black;
+      margin: 0px 20px;
+      cursor: pointer;
     }
     
-    .incompleted{
-      display: flex;
-      margin-left: 25px;
-      margin: 10px 30px;
+    .incompleted{  
+      margin: 0px 20px;
+      position: relative;
+      bottom: 204px;
     }
 
-    .teste{
-      margin-left: 30px;
-      display: flex;
-      flex-direction: row;
+    .teste{      
+      margin-left: -1px;
       max-width: 500px;
-      }
+  }      
 
       .h1TarefaN{
         color: red;
@@ -186,6 +189,23 @@
 
     .spanTask{
       max-width: 100px;
+      margin: 0px 0px;
+      position: relative;
+      left: -3px;
+  }
+
+        .divContat{
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          width: 56%;
+          max-width: 800px;
+          background-color: #ffff00;
+          padding: 306px 50px;
+          margin: 30px auto;
+          /* border-radius: 20px; */
+          color: black;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
         }
 
   }
