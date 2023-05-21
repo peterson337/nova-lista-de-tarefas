@@ -7,22 +7,8 @@ import {BsPencil} from "react-icons/bs";
 import {AiOutlineCheck} from "react-icons/ai";
 import {FaTrash} from "react-icons/fa";
 import Edit_task from "./edit_task";
-import { collection, addDoc } from "firebase/firestore"; // importando a biblioteca
+import { collection, addDoc, deleteDoc, doc } from "firebase/firestore"; // importando a biblioteca
 import {db} from "./firabse";
-
-
-// criando uma referência para a coleção de tarefas
-const tasksCollectionRef = collection(db, "tasks");
-
-// escrevendo os dados da tarefa no Firestore
-async function addTaskToFirestore(task) {
-  try {
-    const docRef = await addDoc(tasksCollectionRef, task);
-    /* console.log("Task written with ID: ", docRef.id); */
-  } catch (e) {
-    console.error("Error adding task: ", e);
-  }
-}
 
 
 const App = () => {
@@ -34,6 +20,27 @@ const App = () => {
   const [modalEditarTarefa, setModalEditarTarefa] = useState(false);
   const [editTask, setEditTask] = useState(null); // adicionar o estado editTask
 
+  const tasksCollectionRef = collection(db, 'tasks');
+
+  async function addTaskToFirestore(task) {
+    try {
+      const docRef = await addDoc(tasksCollectionRef, task);
+      /* console.log("Task written with ID: ", docRef.id); */
+    } catch (e) {
+      console.error('Error adding task: ', e);
+    }
+  }
+  
+  const deleteTaskFromFirestore = async (task) => {
+    try {
+      const taskDocRef = doc(db, "tasks", task);
+      await deleteDoc(taskDocRef);
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
+  };
+  
+  
   
   
   useEffect(() => {
@@ -63,7 +70,7 @@ const App = () => {
       id: Date.now(),
       completed: false
     }
-    addTaskToFirestore(word); // <- Chamando a função aqui
+//?      addTaskToFirestore(word); // <- Chamando a função aqui
     const newList = [...itemsList, word];
     setItemsList(newList);
     localStorage.setItem("itemsList", JSON.stringify(newList));
@@ -74,17 +81,22 @@ const App = () => {
     setModal(false);
   }
 
-  const  handleDeleteItem = (id) => {
+
+
+  const handleDeleteItem = async (id) => {
+    // Excluir a tarefa do Firestore
+//?    await deleteTaskFromFirestore(id);
+
     const updatedItemsList = itemsList.filter((item) => item.id !== id);
     setItemsList(updatedItemsList);
     if (updatedItemsList.length === 0) {
-      localStorage.removeItem("itemsList");
+      localStorage.removeItem('itemsList');
     } else {
-      localStorage.setItem("itemsList", JSON.stringify(updatedItemsList));
+      localStorage.setItem('itemsList', JSON.stringify(updatedItemsList));
     }
-    
-  }
+  };
 
+    
 const handleToggleCompleted = (itemId) => {
   const updatedItems = itemsList.map((item) => {
     if (item.id === itemId) {
