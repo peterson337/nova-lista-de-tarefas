@@ -9,6 +9,7 @@ import {FaTrash} from "react-icons/fa";
 import Edit_task from "./edit_task";
 import { collection, addDoc, deleteDoc, doc } from "firebase/firestore"; // importando a biblioteca
 import {db} from "./firabse";
+import {BsSun} from "react-icons/bs";
 
 
 const App = () => {
@@ -46,11 +47,16 @@ const App = () => {
   
   
   useEffect(() => {
-    const storedList = JSON.parse(localStorage.getItem('itemsList'));
+    const storedList = JSON.parse(localStorage.getItem("itemsList"));
     if (storedList) {
       setItemsList(storedList);
     }
+    const storedTeste = localStorage.getItem("teste");
+    if (storedTeste) {
+      setTeste(JSON.parse(storedTeste));
+    }
   }, []);
+
 
   
 
@@ -65,7 +71,7 @@ const App = () => {
     if (!task.trim()) { // <----- Se nao tiver vazio, nao faz nada
       alert("Escreva alguma coisa para adicionar  uma tarefa");
       return
-    };
+    }
 
     const word ={
       task: task,
@@ -176,14 +182,25 @@ const iconStyle = {
 };
 
 
+const mudarDivBox = () => {
+    setTeste (!teste);
+  localStorage.setItem("teste", JSON.stringify(!teste)); 
+}
+
   return (
 
       <div>
       <div className={teste? 'divContatT' : 'divContat'}>
-      <h1 className='titleH1'>Tarefas do dia!</h1>           
-      <button
-      onClick={() => setTeste (!teste)}
-      >Teste</button>
+      <h1 className={ teste && innerWidth < 768? 'titleH1T' : 'titleH1' }>Tarefas do dia!</h1>           
+     
+     <div className='divButton'>
+     <button
+     className='button'
+      onClick={mudarDivBox}
+      >
+      <BsSun/>
+      </button>
+     </div>
 
       <div>
         <button onClick={abrirModal}

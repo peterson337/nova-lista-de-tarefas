@@ -27,6 +27,15 @@
 
   }
 
+  .titleH1T{
+    margin: 10px 27px;
+    width: 234px;
+    font-size: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+
+  }
+
 .completed {
   margin-left: 155px;
   word-wrap: break-word;
@@ -60,7 +69,7 @@
     align-items: center;
     width: 56%;
     max-width: 800px;
-    background-color: #ffff00;
+    background-color: #ffff70;
     padding: 306px 0px;
     margin: 30px auto;
     /* border-radius: 20px; */
@@ -157,6 +166,26 @@
     line-height: 5px;
   }
 
+  .divButton{
+        position: absolute;
+        top: 40px;
+        right: 300px;
+  }
+
+  .button{
+        position: relative;
+        padding: 5px;
+        background-color: #0084ff;
+        color: white;
+        border: 0;
+        padding: 15px;
+        border-radius: 30px;
+        line-height: 10px;
+  }
+
+  .button:hover{
+    background-color: red;
+}
   @media screen and (max-width:768px) {
     .btnAbrirModal{
    
@@ -216,7 +245,7 @@
           align-items: center;
           width: 56%;
           max-width: 800px;
-          background-color: #ffff00;
+          background-color: #ffff70;
           padding: 306px 50px;
           margin: 30px auto;
           /* border-radius: 20px; */
@@ -224,4 +253,45 @@
           box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
         }
 
+        .divContatT{
+          text-align: center;
+          justify-content: center;
+          align-items: center;
+          width: 80%;
+          max-width: 800;
+          background-color: white;
+          padding: 306px 0px;
+          margin: 30px auto;
+          border-radius: 20px; 
+          color: black;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
+        }
+
+        .titleH1T{
+          width: 234px;
+          font-size: 30px;
+          margin: 20px 30px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid black;
+          position: relative;
+          bottom: 204px;
+      
+        }
+
+        .divButton{
+          position: absolute;
+          top: 40px;
+          right: 45px;
+    }
+  
+    .button{
+          position: relative;
+          padding: 5px;
+          background-color: #0084ff;
+          color: white;
+          border: 0;
+          padding: 15px;
+          border-radius: 30px;
+          line-height: 10px;
+    }
   }
