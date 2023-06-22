@@ -19,6 +19,8 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [modalEditarTarefa, setModalEditarTarefa] = useState(false);
   const [editTask, setEditTask] = useState(null); // adicionar o estado editTask
+  const [teste, setTeste] = useState(false);
+
 
   const tasksCollectionRef = collection(db, 'tasks');
 
@@ -173,11 +175,16 @@ const iconStyle = {
   borderRadius: '20%'
 };
 
+
   return (
 
       <div>
-      <div className='divContat'>
+      <div className={teste? 'divContatT' : 'divContat'}>
       <h1 className='titleH1'>Tarefas do dia!</h1>           
+      <button
+      onClick={() => setTeste (!teste)}
+      >Teste</button>
+
       <div>
         <button onClick={abrirModal}
     className="btnAbrirModal">+</button>
@@ -189,7 +196,9 @@ const iconStyle = {
     <div key={index}
     className={item.completed ? "completed" : "incompleted"}> <span className='spanTask' 
     onClick={() => handleToggleCompleted(item.id)}>
-    {item.task}</span>
+    {item.task}
+    </span>
+
     <div className='teste'>
 
     <span style={iconStyle} onClick={() => handleDeleteItem(item.id)}> 

@@ -68,6 +68,20 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
   }
 
+  .divContatT{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 56%;
+    max-width: 800px;
+    background-color: white;
+    padding: 306px 0px;
+    margin: 30px auto;
+    border-radius: 20px; 
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5)
+  }
+
 
   .btnAbrirModal{
     position: fixed;
